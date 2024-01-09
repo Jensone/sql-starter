@@ -34,13 +34,15 @@ LIKE '%smartphone%');
 
 
 -- Recherche avec INNER JOIN
-SELECT `title`, `content`, `note`, 
-`user_id`, `product_id`
+SELECT 
+    `title`, 
+    `content`, 
+    `note`, 
+    `user_id`, 
+    `product_id`
 FROM `reviews`
-INNER JOIN `products`
-ON `reviews`.`product_id` = `products`.`price`
-INNER JOIN `users`
-ON `reviews`.`user_id`= `users`.`firstname`
+INNER JOIN `products` ON `reviews`.`product_id` = `products`.`price`
+INNER JOIN `users` ON `reviews`.`user_id`= `users`.`firstname`
 ;
 
 -- Recherche avec LEFT JOIN
