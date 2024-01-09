@@ -61,3 +61,45 @@ LEFT JOIN `products` ON `reviews`.`product_id` = `products`.`id`;
 ```
 
 Page récapitulatif des recherches avec jointures : [Jointures SQL](https://sql.sh/cours/jointures)
+
+
+## Exercices
+
+Réalise une requête qui retourne un panier et son contenu.
+
+```sql
+SELECT
+    `carts`.`cart_id`,
+    `product_carts`.`quantity`,
+    `products`.`product_id`,
+    `products`.`product_name`,
+    `products`.`product_price`,
+    `products`.`product_description`
+FROM
+    `carts`
+JOIN
+    `product_carts` ON `carts`.`id` = `product_carts`.`cart_id`
+JOIN
+    `products` ON `product_carts`.`product_id` = `products`.`id`
+WHERE
+    `carts`.`id` = 1; 
+
+
+SELECT
+    c.id AS cart_id, -- c est un alias pour l'id de carts
+    pc.quantity, -- pc est un alias pour la quantité de product_carts
+    p.id AS product_id, -- p est un alias pour l'id de products
+    p.name AS product_name, -- p est un alias pour le nom de products
+    p.price AS product_price, -- p est un alias pour le prix de products
+    p.description AS product_description -- p est un alias pour la description de products
+FROM
+    carts c -- ici on utilise l'alias c pour carts
+JOIN
+    product_carts pc ON c.id = pc.cart_id -- on fait une jointure entre carts et product_carts
+JOIN
+    products p ON pc.product_id = p.id -- on fait une jointure entre product_carts et products
+WHERE
+    c.id = 2; -- on détermine le panier à afficher
+```
+
+Réalise une requête qui retourne un produit avec sa catégorie et ses étiquettes (tags) et son contenu.
