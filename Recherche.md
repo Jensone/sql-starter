@@ -102,4 +102,19 @@ WHERE
     c.id = 2; -- on détermine le panier à afficher
 ```
 
-Réalise une requête qui retourne un produit avec sa catégorie et ses étiquettes (tags) et son contenu.
+Réalise une requête qui retourne un produit
+ avec sa catégorie 
+ et ses étiquettes (tags) 
+ et son contenu.
+
+
+SELECT 
+    `products`.`name`,
+    `products`.`description`,
+    `products`.`price`,
+    `categories`.`name`,
+    `tags`.`name`
+FROM `products`
+LEFT JOIN `categories` ON `products`.`category_id` = `categories`.`id`
+LEFT JOIN `products_tags` ON `products`.`id` = `products_tags`.`product_id`
+WHERE `products`.`id` = 1;
