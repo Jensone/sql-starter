@@ -65,7 +65,7 @@ Page récapitulatif des recherches avec jointures : [Jointures SQL](https://sql.
 
 ## Exercices
 
-Réalise une requête qui retourne un panier et son contenu.
+1 - Réalise une requête qui retourne un panier et son contenu.
 
 ```sql
 SELECT
@@ -102,21 +102,27 @@ WHERE
     c.id = 2; -- on détermine le panier à afficher
 ```
 
-Réalise une requête qui retourne un produit
- avec sa catégorie 
- et ses étiquettes (tags) 
- et son contenu.
+2 - Réalise une requête qui retourne un produit avec sa catégorie et ses étiquettes (tags) et son contenu.
 
-
+```sql
 SELECT 
     `products`.`name`,
     `products`.`description`,
     `products`.`price`,
     `categories`.`name`,
     `tags`.`name`,
-    `products_tags`.`product_id`
+    `products`.`id`
 FROM `products`
 JOIN `categories` ON `products`.`category_id` = `categories`.`id`
-JOIN `products_tags` ON `products`.`id` = `products_tags`.`product_id`
 JOIN `tags` ON `products_tags`.`tag_id` = `tags`.`id`
 WHERE `products`.`id` = 1;
+```
+
+3 - Rédige une requête SQL complexe qui afficher le résultat suivant :
+
+"Le client "X" va acheter "Y" produits pour un montant total de "Z" euros."
+
+X = Nom Prenom
+Y = Nombre de produits
+Z = Montant total
+
