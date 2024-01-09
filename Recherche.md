@@ -113,8 +113,10 @@ SELECT
     `products`.`description`,
     `products`.`price`,
     `categories`.`name`,
-    `tags`.`name`
+    `tags`.`name`,
+    `products_tags`.`product_id`
 FROM `products`
-LEFT JOIN `categories` ON `products`.`category_id` = `categories`.`id`
-LEFT JOIN `products_tags` ON `products`.`id` = `products_tags`.`product_id`
+JOIN `categories` ON `products`.`category_id` = `categories`.`id`
+JOIN `products_tags` ON `products`.`id` = `products_tags`.`product_id`
+JOIN `tags` ON `products_tags`.`tag_id` = `tags`.`id`
 WHERE `products`.`id` = 1;
