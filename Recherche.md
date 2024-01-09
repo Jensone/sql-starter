@@ -20,3 +20,15 @@ AND et OR
 ## Opérateurs comparaison 
 
 Tableau complet : https://sql.sh/cours/where
+
+
+## Exemple 
+
+```sql
+SELECT * FROM `products` 
+WHERE (CONVERT(`name` USING utf8) 
+LIKE '%smartphone%' 
+AND CONVERT(`description` USING utf8) 
+LIKE '%smartphone%') 
+````
+
