@@ -17,14 +17,14 @@ CREATE TABLE IF NOT EXISTS users (
     phone VARCHAR(15),
     birthday DATE,
     role VARCHAR(10) NOT NULL
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS categories (
     id INT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(100) NOT NULL,
     image VARCHAR(255),
     description TEXT
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS products (
     id INT PRIMARY KEY AUTO_INCREMENT,
@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS products (
     description TEXT NOT NULL,
     category_id INT NOT NULL,
     FOREIGN KEY (category_id) REFERENCES categories(id)
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS reviews (
     id INT PRIMARY KEY AUTO_INCREMENT,
@@ -44,19 +44,19 @@ CREATE TABLE IF NOT EXISTS reviews (
     product_id INT NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users(id),
     FOREIGN KEY (product_id) REFERENCES products(id)
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS tags (
     id INT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(100) NOT NULL
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS products_tags (
     product_id INT NOT NULL,
     tag_id INT NOT NULL,
     FOREIGN KEY (product_id) REFERENCES products(id),
     FOREIGN KEY (tag_id) REFERENCES tags(id)
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS product_images (
     id INT PRIMARY KEY AUTO_INCREMENT,
@@ -67,17 +67,17 @@ CREATE TABLE IF NOT EXISTS product_images (
     large VARCHAR(255),
     product_id INT NOT NULL,
     FOREIGN KEY (product_id) REFERENCES products(id)
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS stocks (
     product_id INT NOT NULL,
     quantity INT NOT NULL,
     FOREIGN KEY (product_id) REFERENCES products(id)
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS carts (
     id INT PRIMARY KEY AUTO_INCREMENT
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS product_carts (
     quantity INT NOT NULL,
@@ -85,7 +85,7 @@ CREATE TABLE IF NOT EXISTS product_carts (
     cart_id INT NOT NULL,
     FOREIGN KEY (product_id) REFERENCES products(id),
     FOREIGN KEY (cart_id) REFERENCES carts(id)
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS payments (
     id INT PRIMARY KEY AUTO_INCREMENT,
@@ -94,14 +94,14 @@ CREATE TABLE IF NOT EXISTS payments (
     date datetime DEFAULT CURRENT_TIMESTAMP,
     transaction_id VARCHAR(255) NOT NULL,
     type VARCHAR(20) NOT NULL -- CB, Paypal, etc.
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS promos (
     id INT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(100) NOT NULL,
     date DATETIME NOT NULL,
     discount FLOAT NOT NULL
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS deliveries ( 
     id INT PRIMARY KEY AUTO_INCREMENT,
@@ -113,7 +113,7 @@ CREATE TABLE IF NOT EXISTS deliveries (
     default_address BOOLEAN NOT NULL DEFAULT 0,
     user_id INT NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users(id)
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS orders (
     id INT PRIMARY KEY AUTO_INCREMENT,
@@ -129,14 +129,14 @@ CREATE TABLE IF NOT EXISTS orders (
     FOREIGN KEY (promo_id) REFERENCES promos(id),
     FOREIGN KEY (delivery_id) REFERENCES deliveries(id),
     FOREIGN KEY (payment_id) REFERENCES payments(id)
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS invoices (
     id INT PRIMARY KEY AUTO_INCREMENT,
     number INT NOT NULL,
     order_id INT NOT NULL,
     FOREIGN KEY (order_id) REFERENCES orders(id)
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Insertion de données fictives
 
